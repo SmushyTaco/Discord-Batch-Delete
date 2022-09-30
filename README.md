@@ -1,8 +1,8 @@
 # Discord Batch Delete
 ## Table of Contents
 1. [Notice](#notice)
-2. [Images](https://github.com/SmushyTaco/Discord-Batch-Delete#images)
-3. [Instructions](https://github.com/SmushyTaco/Discord-Batch-Delete#instructions)
+2. [Images](#images)
+3. [Instructions](#instructions)
 ### Notice
 This has only been tested on 64 bit Windows, if it doesn't work on other platforms I'm not providing support.
 ### Images
