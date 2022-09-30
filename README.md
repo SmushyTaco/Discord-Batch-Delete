@@ -1,5 +1,9 @@
 # Discord Batch Delete
-## Notice
+## Table of Contents
+1. [Notice](https://github.com/SmushyTaco/Discord-Batch-Delete#notice)
+2. [Images](https://github.com/SmushyTaco/Discord-Batch-Delete#images)
+3. [Instructions](https://github.com/SmushyTaco/Discord-Batch-Delete#instructions)
+### Notice
 This has only been tested on 64 bit Windows, if it doesn't work on other platforms I'm not providing support.
 ### Images
 ![Discord Batch Delete Dark Mode](https://i.imgur.com/6o4geXT.png)
