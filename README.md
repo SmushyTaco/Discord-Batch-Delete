@@ -1,6 +1,6 @@
 # Discord Batch Delete
 ## Table of Contents
-1. [Notice](https://github.com/SmushyTaco/Discord-Batch-Delete#notice)
+1. [Notice](#notice)
 2. [Images](https://github.com/SmushyTaco/Discord-Batch-Delete#images)
 3. [Instructions](https://github.com/SmushyTaco/Discord-Batch-Delete#instructions)
 ### Notice
