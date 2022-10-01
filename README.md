@@ -9,7 +9,7 @@
 ### Notice
 This has only been tested on 64 bit Windows, if it doesn't work on other platforms I'm not providing support.
 ### Instructions
-1. Go download the [latest release](https://github.com/SmushyTaco/Discord-Batch-Delete/releases/latest/) of the Discord Batch Delete Program
+1. Go download the [latest release](https://github.com/SmushyTaco/Discord-Batch-Delete/releases/latest/) of the Discord Batch Delete program.
 2. Put the file wherever you want on your machine, it really doesn't matter where it goes.
 3. Double click it to launch it.
 4. Open the DM you'd like to start batch deleting.
