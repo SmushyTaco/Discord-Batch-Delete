@@ -1,6 +1,6 @@
 # Discord Batch Delete
 ## Table of Contents
-1. [Prerequisites](prerequisites)
+1. [Prerequisites](#prerequisites)
 2. [Notice](#notice)
 3. [Instructions](#instructions)
 4. [Images](#images)
