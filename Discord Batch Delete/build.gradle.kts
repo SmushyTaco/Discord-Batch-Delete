@@ -36,15 +36,11 @@ tasks {
             jvmTarget = JvmTarget.valueOf("JVM_$javaVersion")
         }
     }
-    withType<Jar>().configureEach {
-        duplicatesStrategy = DuplicatesStrategy.INCLUDE
-        manifest { attributes["Main-Class"] = "MainKt" }
-        configurations["compileClasspath"].forEach { from(zipTree(it.absoluteFile)) }
-    }
 }
 compose.desktop {
     application {
         mainClass = "MainKt"
+        buildTypes.release.proguard.isEnabled = false
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = project.extra["project_name"] as String
