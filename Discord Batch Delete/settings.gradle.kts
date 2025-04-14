@@ -1,16 +1,16 @@
-val projectName: String by System.getProperties()
-rootProject.name = projectName
+rootProject.name = settings.extra["project_name"] as String
 pluginManagement {
     repositories {
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         google()
         gradlePluginPortal()
         mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 
     plugins {
-        val composeVersion: String by System.getProperties()
-        id("org.jetbrains.compose").version(composeVersion)
+        kotlin("jvm").version(settings.extra["kotlin_version"] as String)
+        id("org.jetbrains.compose").version(settings.extra["compose_version"] as String)
+        id("org.jetbrains.kotlin.plugin.compose").version(settings.extra["kotlin_version"] as String)
     }
 }
 

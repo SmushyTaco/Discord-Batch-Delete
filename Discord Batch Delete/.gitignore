@@ -47,3 +47,9 @@ bin/
 
 # macos
 *.DS_Store
+
+# Static Analysis
+.PVS-Studio
+
+# Kotlin
+.kotlin
