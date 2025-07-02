@@ -5,9 +5,9 @@
 3. [Instructions](#instructions)
 4. [Images](#images)
 ### Prerequisites
-[Java 17](https://adoptium.net/temurin/releases/) is used for this, if you aren't able to run the program install Java 17.
+[Java 21](https://adoptium.net/temurin/releases/) is used for this, if you aren't able to run the program install Java 21.
 ### Notice
-This has only been tested on 64 bit Windows, if it doesn't work on other platforms I'm not providing support.
+This has only been tested on 64-bit Windows, if it doesn't work on other platforms I'm not providing support.
 ### Instructions
 1. Go download the [latest release](https://github.com/SmushyTaco/Discord-Batch-Delete/releases/latest/) of the Discord Batch Delete program.
 2. Put the file wherever you want on your machine, it really doesn't matter where it goes.
