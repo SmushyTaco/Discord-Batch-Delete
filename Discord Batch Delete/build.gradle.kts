@@ -23,6 +23,7 @@ repositories {
 dependencies {
     implementation(libs.coroutines)
     implementation(libs.materialDesktop)
+    implementation(compose.components.resources)
     implementation(compose.desktop.currentOs)
 }
 java {
@@ -96,6 +97,7 @@ compose.desktop {
             packageName = "Discord Batch Delete"
             packageVersion = projectVersion.get()
             windows {
+                iconFile = file("src/main/resources/icon.ico")
                 menu = true
                 // see https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
                 upgradeUuid = "0D1ABBEE-B46E-4DF5-9C2F-851B6E3BB68A"

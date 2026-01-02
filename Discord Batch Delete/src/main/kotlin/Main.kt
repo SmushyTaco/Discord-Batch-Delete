@@ -13,9 +13,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.smushytaco.discord_batch_delete.generated.resources.Res
+import com.smushytaco.discord_batch_delete.generated.resources.icon
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.painterResource
 import java.awt.Robot
 import java.awt.event.KeyEvent
 import java.lang.foreign.*
@@ -177,7 +180,8 @@ fun app() {
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
-        title = "Discord Batch Delete"
+        title = "Discord Batch Delete",
+        icon = painterResource(Res.drawable.icon)
     ) {
         app()
     }
