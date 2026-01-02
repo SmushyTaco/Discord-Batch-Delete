@@ -16,5 +16,6 @@ This has only been tested on 64-bit Windows, if it doesn't work on other platfor
 5. Press **Start Batch Deleting** and then click into the window that has the DM open. If you accidentally click out of Discord the batch deleter won't mess with anything else, it only runs if your selected window is a Discord one so it's safe from most human error.
 6. Just sit and wait while it does it's thing. Once it's done you can press **Stop Batch Deleting** and/or quit the program. Have fun!
 ### Images
-![Discord Batch Delete Dark Mode](https://i.imgur.com/6o4geXT.png)
-![Discord Batch Delete Light Mode](https://i.imgur.com/lygIF9A.png)
+![Discord Batch Delete Dark Mode](https://i.imgur.com/vLkYN0F.png)
+
+![Discord Batch Delete Light Mode](https://i.imgur.com/WWxtmaJ.png)
