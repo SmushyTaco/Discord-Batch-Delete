@@ -1,4 +1,4 @@
-val projectName = providers.gradleProperty("project_name")
+val projectName: Provider<String> = providers.gradleProperty("project_name")
 rootProject.name = projectName.get()
 pluginManagement {
     repositories {

@@ -15,15 +15,12 @@ gradleJava = "25"
 compose = "1.9.3"
 # Check this on https://github.com/Kotlin/kotlinx.coroutines/releases/latest/
 coroutines = "1.10.2"
-# Check this on https://central.sonatype.com/artifact/net.java.dev.jna/jna-platform/
-javaNativeAccess = "5.18.1"
 # Check this on https://central.sonatype.com/artifact/org.jetbrains.compose.material3/material3-desktop/
 materialDesktop = "1.9.0"
 ##########################################################################
 
 [libraries]
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
-javaNativeAccess = { group = "net.java.dev.jna", name = "jna-platform", version.ref = "javaNativeAccess" }
 materialDesktop = { group = "org.jetbrains.compose.material3", name = "material3-desktop", version.ref = "materialDesktop" }
 
 [plugins]

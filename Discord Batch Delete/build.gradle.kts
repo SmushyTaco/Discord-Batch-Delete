@@ -6,9 +6,9 @@ plugins {
     alias(libs.plugins.kotlin.plugin.compose)
     alias(libs.plugins.compose)
 }
-val projectName = providers.gradleProperty("project_name")
-val projectGroup = providers.gradleProperty("project_group")
-val projectVersion = providers.gradleProperty("project_version")
+val projectName: Provider<String> = providers.gradleProperty("project_name")
+val projectGroup: Provider<String> = providers.gradleProperty("project_group")
+val projectVersion: Provider<String> = providers.gradleProperty("project_version")
 
 val javaVersion: Provider<Int> = libs.versions.java.map { it.toInt() }
 
@@ -22,7 +22,6 @@ repositories {
 }
 dependencies {
     implementation(libs.coroutines)
-    implementation(libs.javaNativeAccess)
     implementation(libs.materialDesktop)
     implementation(compose.desktop.currentOs)
 }
@@ -55,6 +54,7 @@ val licenseFile = run {
 tasks {
     withType<JavaCompile>().configureEach {
         options.encoding = "UTF-8"
+        options.forkOptions.jvmArgs?.add("--enable-native-access=ALL-UNNAMED")
         sourceCompatibility = javaVersion.get().toString()
         targetCompatibility = javaVersion.get().toString()
         if (javaVersion.get() > 8) options.release = javaVersion
@@ -63,9 +63,15 @@ tasks {
         languageVersion = libs.versions.gradleJava.map { JavaLanguageVersion.of(it.toInt()) }
         vendor = JvmVendorSpec.ADOPTIUM
     }
-    withType<JavaExec>().configureEach { defaultCharacterEncoding = "UTF-8" }
+    withType<JavaExec>().configureEach {
+        defaultCharacterEncoding = "UTF-8"
+        jvmArgs("--enable-native-access=ALL-UNNAMED")
+    }
     withType<Javadoc>().configureEach { options.encoding = "UTF-8" }
-    withType<Test>().configureEach { defaultCharacterEncoding = "UTF-8" }
+    withType<Test>().configureEach {
+        defaultCharacterEncoding = "UTF-8"
+        jvmArgs("--enable-native-access=ALL-UNNAMED")
+    }
     withType<KotlinCompile>().configureEach {
         compilerOptions {
             extraWarnings = true
@@ -84,9 +90,10 @@ compose.desktop {
     application {
         mainClass = "MainKt"
         buildTypes.release.proguard.isEnabled = false
+        jvmArgs.add("--enable-native-access=ALL-UNNAMED")
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = projectName.get()
+            targetFormats(TargetFormat.Msi)
+            packageName = "Discord Batch Delete"
             packageVersion = projectVersion.get()
             windows {
                 menu = true

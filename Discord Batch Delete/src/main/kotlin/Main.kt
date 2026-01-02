@@ -4,14 +4,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,34 +13,66 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.sun.jna.Native
-import com.sun.jna.platform.win32.WinDef.HWND
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.awt.Robot
 import java.awt.event.KeyEvent
+import java.lang.foreign.*
+import java.nio.charset.StandardCharsets
 
 const val MAX_TITLE_LENGTH = 1024
 
-internal object User32DLL {
-    init {
-        Native.register("user32")
+private object User32FFM {
+    private val linker = Linker.nativeLinker()
+
+    private val lookup: SymbolLookup = SymbolLookup.libraryLookup("user32", Arena.global())
+
+    private val HWND = ValueLayout.ADDRESS
+
+    private val INT = ValueLayout.JAVA_INT
+
+    private val getForegroundWindow = linker.downcallHandle(
+        lookup.find("GetForegroundWindow").orElseThrow(),
+        FunctionDescriptor.of(HWND)
+    )
+
+    private val getWindowTextW = linker.downcallHandle(
+        lookup.find("GetWindowTextW").orElseThrow(),
+        FunctionDescriptor.of(INT, HWND, ValueLayout.ADDRESS, INT)
+    )
+
+    fun getForegroundWindow(): MemorySegment {
+        return getForegroundWindow.invokeExact() as MemorySegment
     }
 
-    @Suppress("FunctionName")
-    external fun GetForegroundWindow(): HWND
-
-    @Suppress("FunctionName")
-    external fun GetWindowTextW(hWnd: HWND, lpString: CharArray, nMaxCount: Int): Int
+    fun getWindowTextW(hwnd: MemorySegment, buffer: MemorySegment, maxCount: Int): Int {
+        return getWindowTextW.invokeExact(hwnd, buffer, maxCount) as Int
+    }
 }
 
 fun getActiveWindowTitle(): String {
-    val buffer = CharArray(MAX_TITLE_LENGTH * 2)
-    val foregroundWindow: HWND = User32DLL.GetForegroundWindow()
-    User32DLL.GetWindowTextW(foregroundWindow, buffer, MAX_TITLE_LENGTH)
-    return Native.toString(buffer)
+    Arena.ofConfined().use { arena ->
+        val hwnd = User32FFM.getForegroundWindow()
+
+        val bufBytes = (MAX_TITLE_LENGTH + 1) * 2
+        val buf = arena.allocate(bufBytes.toLong(), 2)
+
+        User32FFM.getWindowTextW(hwnd, buf, MAX_TITLE_LENGTH)
+
+        val bytes = buf.asByteBuffer()
+        var end = 0
+        while (end + 1 < bytes.limit()) {
+            if (bytes[end] == 0.toByte() && bytes[end + 1] == 0.toByte()) break
+            end += 2
+        }
+        val arr = ByteArray(end)
+        bytes.position(0)
+        bytes[arr]
+        return String(arr, StandardCharsets.UTF_16LE)
+    }
 }
+
 
 val isActiveTitleADiscordTitle: Boolean
     get() {
