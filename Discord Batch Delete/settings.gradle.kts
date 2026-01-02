@@ -7,12 +7,11 @@ pluginManagement {
         gradlePluginPortal()
         mavenCentral()
     }
-    val kotlinVersion = providers.gradleProperty("kotlin_version")
-    val composeVersion = providers.gradleProperty("compose_version")
+    val foojayResolverVersion = providers.gradleProperty("foojay_resolver_version")
     plugins {
-        kotlin("jvm").version(kotlinVersion.get())
-        id("org.jetbrains.compose").version(composeVersion.get())
-        id("org.jetbrains.kotlin.plugin.compose").version(kotlinVersion.get())
+        id("org.gradle.toolchains.foojay-resolver-convention").version(foojayResolverVersion.get())
     }
 }
-
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention")
+}
