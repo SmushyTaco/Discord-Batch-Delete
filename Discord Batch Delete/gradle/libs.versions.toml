@@ -12,11 +12,11 @@ gradleJava = "25"
 ##########################################################################
 # Dependencies
 # Check this on https://github.com/JetBrains/compose-jb/releases/latest/
-compose = "1.9.3"
+compose = "1.10.0"
 # Check this on https://github.com/Kotlin/kotlinx.coroutines/releases/latest/
 coroutines = "1.10.2"
 # Check this on https://central.sonatype.com/artifact/org.jetbrains.compose.material3/material3-desktop/
-materialDesktop = "1.9.0"
+materialDesktop = "1.10.0-alpha05"
 ##########################################################################
 
 [libraries]
